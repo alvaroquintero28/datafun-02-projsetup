@@ -3,14 +3,15 @@
 import os
 import pathlib
 from tracemalloc import start
+import stellar_analytics_utils
 import AlvaroQuinteroGonzalez_utils
 
 base_directory = ("datafun-02-projects")
 
 def create_folders_for_range(start_year, end_year):
     # Range will be in years
-    start_year = 2020
-    end_year = 2023
+    start_year = 2015
+    end_year = 2024
     for i in range(start_year, end_year + 1):
         folder_name = f"folder_{i}"
     folder_path = os.path.join(base_directory, folder_name)
@@ -39,7 +40,7 @@ def main():
     print(f"byline:{AlvaroQuinteroGonzalez_utils}")
 
     # Call fuction 1 to create folder for a range (years)
-    create_folders_for_range(start_year=2020, end_year=2023)
+    create_folders_for_range(start_year=2015, end_year=2024)
 
     # Call function 2 to create folders given a list
     folder_names = ['data-csv', 'data-excel', 'data-json']
