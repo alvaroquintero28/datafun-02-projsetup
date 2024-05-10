@@ -1,59 +1,55 @@
-''' Start a data analytics project '''
+''' Alvaro is new to this '''
 
+import os
 import pathlib
-from pathlib import Path
+from tracemalloc import start
+import AlvaroQuinteroGonzalez_utils
 
-def create_project_directory(directory_name: str) -> None:
-    """
-    Creates a project sub directory.
-    :param directory_name: Name of the directory to be created, eg "test"
-    """
-    pathlib.Path(directory_name).mkdir(exist_ok=True)
+base_directory = ("datafun-02-projects")
 
-def create_file_or_directory(fname):
-    path = Path(fname)
+def create_folders_for_range(start_year, end_year):
+    # Range will be in years
+    start_year = 2020
+    end_year = 2023
+    for i in range(start_year, end_year + 1):
+        folder_name = f"folder_{i}"
+    folder_path = os.path.join(base_directory, folder_name)
+    os.makedirs(folder_path, exist_ok=True)
 
-    if '/' in fname or '\\' in fname:
-        print("Detected a slash or backslash. Please use Path.joinpath() to combine paths.")
-    elif fname.endswith('.py') or fname.endswith('.md'): 
-        # Create a file if it doesn't exist
-        if not path.exists():
-            path.touch(exist_ok=True)
-            print(f"File '{fname}' created.")
-        else:
-            print(f"File '{fname}' already exists.")
-    else:
-        # Create a directory
-        if not path.exists():
-            path.mkdir(exist_ok=True)
-            print(f"Directory '{fname}' created.")
-        else:
-            print(f"Directory '{fname}' already exists.")
+def create_folders_from_list(folder_list):
+    # From list of names
+    folder_names = ['data-csv', 'data-excel', 'data-json']
+    for folder_name in folder_names:
+        folder_path = os.path.join(base_directory, folder_name)
+    os.makedirs(folder_path, exist_ok=True)
 
-
+def create_prefixed_folders(folder_list, prefixed):
+    # Create prefixed folders from a list of names
+    folder_names = ['data-csv', 'data-excel', 'data-json']
+    prefix = 'data-'
+    for folder_name in folder_names:
+        prefixed_folder_name = prefix + folder_name
+    folder_path = os.path.join(base_directory, prefixed_folder_name)
+    os.makedirs(folder_path, exist_ok=True)
 
 def main():
-    create_project_directory('test')
-    create_project_directory('docs')
-    
-""" 
-   # Example usage
-    create_file_or_directory('test.py')        # For a Python file
-    create_file_or_directory('my_directory')   # For a directory
-    create_file_or_directory('example.txt')    # Neither a Python file nor a Markdown file
+    '''Main function to demonstrate module capabilities'''
 
+    # Pring byline from imported module
+    print(f"byline:{AlvaroQuinteroGonzalez_utils}")
 
-    # List of weekday folder names
-    day_list = ["01-Mon", "02-Tue", "03-Wed", "04-Thu", "05-Fri", "06-Sat", "07-Sun"]
+    # Call fuction 1 to create folder for a range (years)
+    create_folders_for_range(start_year=2020, end_year=2023)
 
-    # Iterate through the list and create folders
-    for day in day_list:
-        folder_name = f"data-{day}"
-        Path(folder_name).mkdir(exist_ok=True)
-        print(f"Folder '{folder_name}' created.")
-    
-    create_annual_data_directories(directory_name='data', start_year= 2000, end_year=2024) 
+    # Call function 2 to create folders given a list
+    folder_names = ['data-csv', 'data-excel', 'data-json']
+    create_folders_from_list(folder_names)
 
-"""
+    # Call function 3 to create folders using comprehension
+    folder_names = ['csv', 'excel', 'json']
+    prefix = 'data-'
+    create_prefixed_folders(folder_names, prefix)
+
+# Call main function to execute the code
 if __name__ == '__main__':
-    main()   
+    main()
